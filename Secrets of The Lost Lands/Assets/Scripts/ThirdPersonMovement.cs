@@ -18,6 +18,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public bool isGrounded;
     Vector3 velocity;
     float turnSmoothVelocity;
+
     void Update()
     {
 
@@ -37,9 +38,9 @@ public class ThirdPersonMovement : MonoBehaviour
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if (isGrounded && velocity.y <=.3f)
+        if (isGrounded && velocity.y <=0f)
         {
-            velocity.y = .15f;
+            velocity.y = -2f;
             isGrounded = true;
         }
 
@@ -48,10 +49,7 @@ public class ThirdPersonMovement : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeigt * -2f * gravity);
         }
 
-        if (!isGrounded)
-        {
-            velocity.y += gravity * Time.deltaTime;
-        }
+        velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
     }
