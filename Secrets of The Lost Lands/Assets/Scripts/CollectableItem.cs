@@ -7,7 +7,14 @@ public class CollectableItem : MonoBehaviour
     public enum ItemType { key, statuette }
     public ItemType itemType;
     public Player player;
+    public GameObject UIManager;
+    public int messageNumber;
+    private CommunicationManager communicationManager;
 
+    private void Start()
+    {
+        communicationManager = UIManager.GetComponent<CommunicationManager>();
+    }
 
     public void OnTriggerEnter(Collider other)
     {
@@ -30,6 +37,7 @@ public class CollectableItem : MonoBehaviour
                 Debug.Log("Key collected");
                 Destroy(gameObject);
                 player.collectedKeys += 1;
+                communicationManager.ChangeText(messageNumber, $"{player.collectedKeys}/4");
             }
 
         }
