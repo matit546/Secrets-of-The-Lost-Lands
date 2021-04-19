@@ -19,6 +19,11 @@ public class CommunicationManager : MonoBehaviour
         messageDatas[messageNumber].text.color = color;
     }
 
+    public void ChangeSprite(int messageNumber, Sprite sprite)
+    {
+        messageDatas[messageNumber].image.sprite = sprite;
+    }
+
     public void ChangeText(int messageNumber, string text)
     {
         messageDatas[messageNumber].text.text = text;
@@ -27,6 +32,11 @@ public class CommunicationManager : MonoBehaviour
     public void DisableMessage(int messageNumber)
     {
         messageDatas[messageNumber].panel.SetActive(false);
+    }
+
+    public bool IsEnabled(int messageNumber)
+    {
+        return messageDatas[messageNumber].panel.activeSelf;
     }
 }
 
@@ -39,4 +49,6 @@ public class MessageData
     public GameObject panel;
     [SerializeField]
     public int messageNumber;
+    [SerializeField]
+    public Image image;
 }
