@@ -6,5 +6,12 @@ public class Player : MonoBehaviour
 {
     public int collectedStatuettes;
     public int collectedKeys;
-    public const int maxCollectedKeys = 4;
+    public int maxCollectedKeys = 4;
+    public bool godMode;
+
+
+    private void Update()
+    {
+        //game of the time
+    }
 }

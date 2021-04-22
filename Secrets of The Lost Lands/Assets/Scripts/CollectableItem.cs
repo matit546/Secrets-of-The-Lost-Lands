@@ -10,6 +10,9 @@ public class CollectableItem : MonoBehaviour
     public GameObject UIManager;
     public int messageNumber;
     private CommunicationManager communicationManager;
+    public Sprite sprite;
+    public int pickObjectCommunicate = 0;
+    public int  keyCollectedText=1;
 
     private void Start()
     {
@@ -20,9 +23,11 @@ public class CollectableItem : MonoBehaviour
     {
         if (other.CompareTag("Player") && itemType == ItemType.statuette)
         {
-            Debug.Log("Statuette collected");
-            Destroy(gameObject);
+            communicationManager.EnableMessage(messageNumber);
+            communicationManager.ChangeText(messageNumber, "Zebra³eœ statuetkê");
             player.collectedStatuettes += 1;
+            communicationManager.DisableMessageCourotine(messageNumber, 3);
+            Destroy(gameObject);
         }
 
     }
@@ -31,16 +36,29 @@ public class CollectableItem : MonoBehaviour
     {
         if (other.CompareTag("Player") && itemType == ItemType.key)
         {
-            // Click E to collect
+            communicationManager.EnableMessage(pickObjectCommunicate);
+            communicationManager.ChangeText(pickObjectCommunicate, "Podnieœ Klucz");
+            communicationManager.ChangeSprite(pickObjectCommunicate, sprite);
             if (Input.GetKey(KeyCode.E))
             {
-                Debug.Log("Key collected");
-                Destroy(gameObject);
+                communicationManager.DisableMessage(pickObjectCommunicate);
+                communicationManager.EnableMessage(messageNumber);
+                communicationManager.ChangeText(messageNumber, "Zebra³eœ Klucz");
                 player.collectedKeys += 1;
-                communicationManager.ChangeText(messageNumber, $"{player.collectedKeys}/4");
+                communicationManager.ChangeText(keyCollectedText, $"{player.collectedKeys}/{player.maxCollectedKeys}");
+                communicationManager.DisableMessageCourotine(messageNumber,3);
+                Destroy(gameObject);
             }
 
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        communicationManager.DisableMessage(pickObjectCommunicate);
+    }
+
+
+
 
 }

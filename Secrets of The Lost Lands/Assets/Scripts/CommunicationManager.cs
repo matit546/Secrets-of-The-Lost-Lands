@@ -24,6 +24,11 @@ public class CommunicationManager : MonoBehaviour
         messageDatas[messageNumber].image.sprite = sprite;
     }
 
+    public void DisableImage(int messageNumber)
+    {
+        messageDatas[messageNumber].image.enabled = false;
+    }
+
     public void ChangeText(int messageNumber, string text)
     {
         messageDatas[messageNumber].text.text = text;
@@ -31,6 +36,17 @@ public class CommunicationManager : MonoBehaviour
 
     public void DisableMessage(int messageNumber)
     {
+        messageDatas[messageNumber].panel.SetActive(false);
+    }
+    public  void DisableMessageCourotine(int messageNumber, int seconds)
+    {
+        StartCoroutine(CourotineDisableTextbox(messageNumber, seconds));
+
+    }
+
+     IEnumerator CourotineDisableTextbox(int messageNumber, int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
         messageDatas[messageNumber].panel.SetActive(false);
     }
 
