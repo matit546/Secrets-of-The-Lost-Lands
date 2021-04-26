@@ -24,7 +24,7 @@ public class CollectableItem : MonoBehaviour
         if (other.CompareTag("Player") && itemType == ItemType.statuette)
         {
             communicationManager.EnableMessage(messageNumber);
-            communicationManager.ChangeText(messageNumber, "Zebra³eœ statuetkê");
+            communicationManager.ChangeText(messageNumber, "Zebrano statuetkê");
             player.collectedStatuettes += 1;
             communicationManager.DisableMessageCourotine(messageNumber, 3);
             Destroy(gameObject);
@@ -43,7 +43,7 @@ public class CollectableItem : MonoBehaviour
             {
                 communicationManager.DisableMessage(pickObjectCommunicate);
                 communicationManager.EnableMessage(messageNumber);
-                communicationManager.ChangeText(messageNumber, "Zebra³eœ Klucz");
+                communicationManager.ChangeText(messageNumber, "Zebrano Klucz");
                 player.collectedKeys += 1;
                 communicationManager.ChangeText(keyCollectedText, $"{player.collectedKeys}/{player.maxCollectedKeys}");
                 communicationManager.DisableMessageCourotine(messageNumber,3);
