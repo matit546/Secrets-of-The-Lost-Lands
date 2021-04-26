@@ -31,7 +31,6 @@ public class PlayerRaycast : MonoBehaviour
                 {
                     if (hit.transform == objectTransform)
                     {
-                        objectTransform.GetComponent<MeshRenderer>().material.color = Color.green;
                         if (!communicationManager.IsEnabled(messageNumber) && !isHolding)
                         {
                             communicationManager.EnableMessage(messageNumber);
@@ -54,13 +53,8 @@ public class PlayerRaycast : MonoBehaviour
             }
             else
             {
-                //parent.GetComponent<MeshRenderer>().material.color = Color.red;
                 if (communicationManager.IsEnabled(messageNumber) && !isHolding)
                 {
-                    foreach (Transform objectTransform in objectParents)
-                    {
-                        objectTransform.GetComponent<MeshRenderer>().material.color = Color.red;
-                    }
                     communicationManager.DisableMessage(messageNumber);
                 }
             }

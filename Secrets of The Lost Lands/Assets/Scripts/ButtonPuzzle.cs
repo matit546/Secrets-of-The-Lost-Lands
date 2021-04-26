@@ -17,6 +17,7 @@ public class ButtonPuzzle : MonoBehaviour
     static int color;
     public Sprite sprite;
     public GameObject planeRed, planeWhite;
+    public Transform crate;
     void Start()
     {
         communicationManager = GameObject.Find("UIController").GetComponent<CommunicationManager>();
@@ -52,6 +53,7 @@ public class ButtonPuzzle : MonoBehaviour
                 communicationManager.EnableMessage(messageNumberCongratulation);
                 communicationManager.ChangeText(messageNumberCongratulation, "Gratulacje, zagadka rozwiazana!");
                 communicationManager.DisableMessageCourotine(messageNumberCongratulation, 3);
+                StartCoroutine(OpenGate());
                 isEnded = true;
                 currentText = "";
             }
@@ -146,5 +148,15 @@ public class ButtonPuzzle : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         clicked = false;
     }
+
+    public IEnumerator OpenGate()
+    {
+        for(int i = 0; i < 100; i++)
+        {
+            yield return null;
+            crate.Translate(0, 0.05f, 0);
+        }
+    }
+
 
 }
