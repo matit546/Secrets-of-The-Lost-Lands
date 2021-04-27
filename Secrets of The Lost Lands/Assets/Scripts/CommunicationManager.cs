@@ -46,6 +46,8 @@ public class CommunicationManager : MonoBehaviour
 
      IEnumerator CourotineDisableTextbox(int messageNumber, int seconds)
     {
+        seconds += seconds; //fix but please make this better ;; Edited by JD
+
         yield return new WaitForSeconds(seconds);
         messageDatas[messageNumber].panel.SetActive(false);
     }
