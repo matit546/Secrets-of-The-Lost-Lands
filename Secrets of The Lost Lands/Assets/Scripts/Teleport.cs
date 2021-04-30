@@ -29,6 +29,9 @@ public class Teleport : MonoBehaviour
         int index = dropdown.value;
         player.transform.position = destination[index].position;
         cc.enabled = true;
+        panel.SetActive(false);
+        isVisible ^= true;
+        Cursor.visible = false;
     }
 
     void Update()
