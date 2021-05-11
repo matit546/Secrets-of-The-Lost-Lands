@@ -13,10 +13,12 @@ public class CollectableItem : MonoBehaviour
     public Sprite sprite;
     public int pickObjectCommunicate = 0;
     public int  keyCollectedText=1;
+    private SaveGameManager saveGameManager;
 
     private void Start()
     {
         communicationManager = UIManager.GetComponent<CommunicationManager>();
+        saveGameManager = GameObject.Find("SaveGameManager").GetComponent<SaveGameManager>();
     }
 
     public void OnTriggerEnter(Collider other)
@@ -26,6 +28,7 @@ public class CollectableItem : MonoBehaviour
             communicationManager.EnableMessage(messageNumber);
             communicationManager.ChangeText(messageNumber, "Zebrano statuetkê");
             player.collectedStatuettes += 1;
+            saveGameManager.pickupNames.Add(this.name);
             communicationManager.DisableMessageCourotine(messageNumber, 3);
             Destroy(gameObject);
         }
@@ -45,6 +48,7 @@ public class CollectableItem : MonoBehaviour
                 communicationManager.EnableMessage(messageNumber);
                 communicationManager.ChangeText(messageNumber, "Zebrano Klucz");
                 player.collectedKeys += 1;
+                saveGameManager.keyNames.Add(this.name);
                 communicationManager.ChangeText(keyCollectedText, $"{player.collectedKeys}/{player.maxCollectedKeys}");
                 communicationManager.DisableMessageCourotine(messageNumber,3);
                 Destroy(gameObject);
@@ -58,7 +62,7 @@ public class CollectableItem : MonoBehaviour
         communicationManager.DisableMessage(pickObjectCommunicate);
     }
 
-
+    
 
 
 }

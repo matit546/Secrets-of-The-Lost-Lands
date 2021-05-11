@@ -7,6 +7,9 @@ public class ChangeSceneScript : MonoBehaviour
 {
     //public GameObject LoadingScreen;
     private int scene;
+    private Transform player;
+    public LoadGameManager loadGameManager;
+    private bool isloadingSave = false;
 
     public void LoadGame(int Scene)
     {
@@ -32,6 +35,18 @@ public class ChangeSceneScript : MonoBehaviour
         //LoadingScreen.SetActive(false);
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
         SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(scene));
+        if(isloadingSave)
+        {
+            loadGameManager.LoadGame();
+            isloadingSave = false;
+        }
 
     }
+
+    public void LoadSave(int Scene)
+    {
+        isloadingSave = true;
+        LoadGame(Scene);
+    }
+
 }

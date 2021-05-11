@@ -5,7 +5,7 @@ using UnityEngine;
 public class ButtonPuzzle : MonoBehaviour
 {
     string[] colorTag = { "#FF0000", "#FFFFFF" };
-    bool isEnded;
+    public bool isEnded;
     private bool clicked;
     static string currentText="";
     string correctText = "☾1▲1┌0█0┐0▲1☽1";
