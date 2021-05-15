@@ -804,7 +804,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "2e02d44b879e4b8ab17fda9a262ab4a7",
     "m_Id": 0,
-    "m_DisplayName": "CellDensity",
+    "m_DisplayName": "Scale",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
