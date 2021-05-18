@@ -46,9 +46,6 @@
             "m_Id": "d29b56e9936e4a6c9a681772df24e39e"
         },
         {
-            "m_Id": "fea2955fe19341f9b179e599f4031e19"
-        },
-        {
             "m_Id": "bacaa4f2cb3b48bba066356ab5020e44"
         },
         {
@@ -89,6 +86,12 @@
         },
         {
             "m_Id": "509d69c3d2f6408ea49ac0b79a73ce5f"
+        },
+        {
+            "m_Id": "f9dc4607504c45c1bcb9bd4acebf5c8e"
+        },
+        {
+            "m_Id": "4b1aae7ed0f0424db8eaac6e2d9da9c9"
         }
     ],
     "m_GroupDatas": [],
@@ -319,7 +322,10 @@
                 "m_Id": "d29b56e9936e4a6c9a681772df24e39e"
             },
             {
-                "m_Id": "fea2955fe19341f9b179e599f4031e19"
+                "m_Id": "f9dc4607504c45c1bcb9bd4acebf5c8e"
+            },
+            {
+                "m_Id": "4b1aae7ed0f0424db8eaac6e2d9da9c9"
             }
         ]
     },
@@ -828,6 +834,21 @@
 }
 
 {
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "38da0f3be3a3424199419eeaa40d4ea0",
+    "m_Id": 0,
+    "m_DisplayName": "Alpha Clip Threshold",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "AlphaClipThreshold",
+    "m_StageCapability": 2,
+    "m_Value": 0.5,
+    "m_DefaultValue": 0.5,
+    "m_Labels": []
+}
+
+{
     "m_SGVersion": 1,
     "m_Type": "UnityEditor.ShaderGraph.PositionNode",
     "m_ObjectId": "44f278a752064c89bd060079827a71e6",
@@ -882,6 +903,39 @@
     },
     "m_Labels": [],
     "m_Space": 2
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "4b1aae7ed0f0424db8eaac6e2d9da9c9",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "SurfaceDescription.AlphaClipThreshold",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "38da0f3be3a3424199419eeaa40d4ea0"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "SurfaceDescription.AlphaClipThreshold"
 }
 
 {
@@ -1616,10 +1670,10 @@
     "m_ActiveSubTarget": {
         "m_Id": "8813ca276c6a4357b6554b907d40aad9"
     },
-    "m_SurfaceType": 1,
+    "m_SurfaceType": 0,
     "m_AlphaMode": 2,
-    "m_TwoSided": false,
-    "m_AlphaClip": false,
+    "m_TwoSided": true,
+    "m_AlphaClip": true,
     "m_CustomEditorGUI": ""
 }
 
@@ -1915,21 +1969,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "b0a778ff85144a95afb72fdb19a549a3",
-    "m_Id": 0,
-    "m_DisplayName": "Alpha",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Alpha",
-    "m_StageCapability": 2,
-    "m_Value": 1.0,
-    "m_DefaultValue": 1.0,
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "b54a6cfbc27b45329ee4595877ae3803",
     "m_Id": 3,
@@ -2210,6 +2249,21 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "d14f5fd678f04d41a9a34f4c4fb9e87a",
+    "m_Id": 0,
+    "m_DisplayName": "Alpha",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Alpha",
+    "m_StageCapability": 2,
+    "m_Value": 1.0,
+    "m_DefaultValue": 1.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.BlockNode",
     "m_ObjectId": "d29b56e9936e4a6c9a681772df24e39e",
     "m_Group": {
@@ -2325,7 +2379,7 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.BlockNode",
-    "m_ObjectId": "fea2955fe19341f9b179e599f4031e19",
+    "m_ObjectId": "f9dc4607504c45c1bcb9bd4acebf5c8e",
     "m_Group": {
         "m_Id": ""
     },
@@ -2342,7 +2396,7 @@
     },
     "m_Slots": [
         {
-            "m_Id": "b0a778ff85144a95afb72fdb19a549a3"
+            "m_Id": "d14f5fd678f04d41a9a34f4c4fb9e87a"
         }
     ],
     "synonyms": [],
