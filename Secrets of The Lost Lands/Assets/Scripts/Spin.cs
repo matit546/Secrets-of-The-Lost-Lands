@@ -19,16 +19,15 @@ public class Spin : MonoBehaviour
         }
 
         timer++;
-
-        if (timer >= 0 && timer < 30)
+        if (timer >= 0 && timer < 31)
         {
             this.transform.Translate(0f, 0.01f, 0f, Space.World);
         }
-        else if(timer >= 30 && timer < 60)
+        else if(timer >= 31 && timer < 61)
         {
             this.transform.Translate(0f, -0.01f, 0f, Space.World);
         }
-        else if(timer == 60)
+        else if(timer == 61)
         {
             timer = 0;
         }

@@ -8,10 +8,14 @@ public class Player : MonoBehaviour
     public int collectedKeys;
     public int maxCollectedKeys = 4;
     public bool godMode;
+    public float gameTime;
 
-
+    private void Start()
+    {
+        gameTime = 0;
+    }
     private void Update()
     {
-        //game of the time
+        gameTime += Time.deltaTime;
     }
 }
