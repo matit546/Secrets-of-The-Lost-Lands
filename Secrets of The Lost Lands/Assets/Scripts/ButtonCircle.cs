@@ -8,7 +8,7 @@ public class ButtonCircle : MonoBehaviour
     public bool isPuzzleEnded;
     public float angle = 90;
     public List<GameObject> goodPositions;
-    public GameObject key;
+    public GameObject sphere;
     private bool clicked;
     CommunicationManager communicationManager;
     int messageNumberClickE = 0;
@@ -62,25 +62,30 @@ public class ButtonCircle : MonoBehaviour
     {
         if (!isPuzzleEnded)
         {
-
             int counter = 0;
-            foreach (var item in goodPositions)
+            goodPositions.ForEach(x =>
             {
-                Debug.Log(item.transform.eulerAngles.y);
-                if (item.transform.eulerAngles.y>=-1 && item.transform.eulerAngles.y<=0)
+                if (x.transform.eulerAngles.y >= -1 && x.transform.eulerAngles.y <= 0)
                 {
                     counter++;
                 }
-            }
+            });
+
             if (counter == 4)
             {
-                key.SetActive(true);
-                isPuzzleEnded = true;
-                communicationManager.EnableMessage(messageNumberCongratulation);
-                communicationManager.ChangeText(messageNumberCongratulation, "Gratulacje, zagadka rozwiazana!");
-                communicationManager.DisableMessageCourotine(messageNumberCongratulation, 3);
+                PuzzleSolvedGrats();
             }
+
         }
+    }
+
+    void PuzzleSolvedGrats()
+    {
+        sphere.SetActive(false);
+        isPuzzleEnded = true;
+        communicationManager.EnableMessage(messageNumberCongratulation);
+        communicationManager.ChangeText(messageNumberCongratulation, "Gratulacje, zagadka rozwiazana!");
+        communicationManager.DisableMessageCourotine(messageNumberCongratulation, 3);
     }
  
     public IEnumerator RotateAnimation()
