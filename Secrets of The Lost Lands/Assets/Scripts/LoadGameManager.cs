@@ -18,7 +18,9 @@ public class LoadGameManager : MonoBehaviour
             player = GameObject.Find("MainCharacter");
 
             //Load save
+            player.GetComponent<CharacterController>().enabled = false;
             player.GetComponent<Transform>().position = new Vector3(save.positionX, save.positionY, save.positionZ);
+            player.GetComponent<CharacterController>().enabled = true;
             DisableGottenKeys(save.keyNames);
             DisableGottenPickups(save.pickupNames);
         }
