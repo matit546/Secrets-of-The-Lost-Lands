@@ -2029,7 +2029,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - _name: DeletePlis
     clip: {fileID: 8300000, guid: 7c17f4f4888dec044b4f7a497eb10e8d, type: 3}
-    volume: 0.18
+    volume: 0.103
     loop: 1
     source: {fileID: 0}
 --- !u!4 &493733318
