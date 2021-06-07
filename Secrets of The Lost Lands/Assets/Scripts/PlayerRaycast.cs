@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerRaycast : MonoBehaviour
 {
+    public int objectLayer;
     public int crateLayer = 1 << 10;
     public int leverLayer = 1 << 8;
     public Camera camera;
@@ -11,7 +12,9 @@ public class PlayerRaycast : MonoBehaviour
     public int messageNumber;
     public GameObject UIManager;
     public GameObject objectHolder;
+    private Transform objectLocation;
     public List<Sprite> sprites;
+    public RiseStairs riseStairs;
 
     private CommunicationManager communicationManager;
     private bool isHolding = false;
@@ -19,17 +22,28 @@ public class PlayerRaycast : MonoBehaviour
 
     private bool didUse = false;
     private bool isRaycastPointingAt = false;
+    public int i = 0;
 
     private void Start()
     {
         communicationManager = UIManager.GetComponent<CommunicationManager>();
+        objectLayer = LayerMask.GetMask("Object");
     }
 
     private void Update()
     {
         if(enabled)
         {
-            if (Physics.Raycast(this.transform.position, camera.transform.forward, out RaycastHit hit, 10, crateLayer))
+            Debug.Log($"Layer: {objectLayer}");
+            Debug.Log($"Layer: {crateLayer}");
+            foreach (Transform items in objectsInTriggers)
+            {
+                Debug.Log($"Layer[{i}]: {items.gameObject.layer}");
+                i++;
+            }
+            i = 0;
+            Debug.DrawRay(this.transform.position, camera.transform.forward, Color.blue, 10);
+            if (Physics.Raycast(this.transform.position, camera.transform.forward, out RaycastHit hit, 10f, crateLayer))
             {
                 foreach (Transform objectTransform in objectsInTriggers)
                 {
@@ -98,6 +112,34 @@ public class PlayerRaycast : MonoBehaviour
                     }
                 }
             }
+            else if(Physics.Raycast(this.transform.position, camera.transform.forward, out RaycastHit hit3, 10f, objectLayer))
+            {
+                Debug.DrawRay(this.transform.position, camera.transform.forward, Color.red, 10);
+                foreach (Transform objectTransform in objectsInTriggers)
+                {
+                    if (hit3.transform == objectTransform)
+                    {
+                        Debug.Log($"Hit: {objectTransform}");
+                        if (!communicationManager.IsEnabled(messageNumber) && !isHolding)
+                        {
+                            communicationManager.EnableMessage(messageNumber);
+                            communicationManager.ChangeText(messageNumber, "Podnieœ");
+                            communicationManager.ChangeSprite(messageNumber, sprites[0]);
+                        }
+
+                        if (Input.GetKey(KeyCode.E) && !isHolding)
+                        {
+
+                            isHolding = true;
+                            communicationManager.ChangeText(messageNumber, "Upuœæ");
+                            communicationManager.ChangeSprite(messageNumber, sprites[1]);
+                            objectTransform.position = objectHolder.transform.position;
+                            objectTransform.SetParent(objectHolder.transform);
+
+                        }
+                    }
+                }
+            }
             else
             {
                 if (communicationManager.IsEnabled(messageNumber) && !isHolding)
@@ -111,11 +153,23 @@ public class PlayerRaycast : MonoBehaviour
                 isHolding = false;
                 foreach (Transform objectTransform in objectsInTriggers)
                 {
-                    if(objectTransform.GetComponent<Rigidbody>())
-                    {
-                        objectTransform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                    }
                     objectTransform.SetParent(null);
+                    Debug.Log(objectTransform.gameObject.layer);
+                    if (objectTransform.gameObject.layer != 12)
+                    {
+                        if (objectTransform.GetComponent<Rigidbody>())
+                        {
+                            objectTransform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                        }
+                    }
+                    else
+                    {
+                        if(objectLocation != null)
+                        {
+                            objectTransform.transform.position = objectLocation.transform.position;
+                            riseStairs.RiseStairsAnim();
+                        }
+                    }
                 }
             }
         }
@@ -137,5 +191,26 @@ public class PlayerRaycast : MonoBehaviour
             enabled = false;
             communicationManager.DisableMessage(messageNumber);
         }
+    }
+
+    public void EnablePutDown(Transform loc)
+    {
+        Debug.Log($"Dodalem: loc");
+        objectLocation = loc;
+        enabled = true;
+        communicationManager.ChangeText(messageNumber, "DajToHamie");
+        communicationManager.ChangeSprite(messageNumber, sprites[1]);
+    }
+
+    public void DisablePutDown(Transform loc)
+    {
+        Debug.Log($"Usunalem: loc");
+        objectLocation = null;
+        if (objectsInTriggers.Count == 0)
+        {
+            enabled = false;
+        }
+        communicationManager.ChangeText(messageNumber, "Upuœæ");
+        communicationManager.ChangeSprite(messageNumber, sprites[1]);
     }
 }
