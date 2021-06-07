@@ -36,12 +36,13 @@ public class SettingsMenu : MonoBehaviour
         resolutionsDropdown.RefreshShownValue();
         fullscreen.isOn = Screen.fullScreen;
         quality.value = QualitySettings.GetQualityLevel();
-
+        slider.value = 0.3f;
     }
 
     public void SetVolume(float volume)
     {
-    
+        AudioManager.musicManagerInstance.SetVolume(volume);
+        slider.value = volume;
     }
 
     public void SetQuality(int quality)

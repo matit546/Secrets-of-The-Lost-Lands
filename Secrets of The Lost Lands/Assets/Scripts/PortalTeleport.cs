@@ -12,8 +12,15 @@ public class PortalTeleport : MonoBehaviour
         if (other.tag =="Player")
         {
             cc.enabled = false;
+
+            AudioManager.musicManagerInstance.StopAllSound();
             other.transform.position = teleportLocation.position;
+            AudioManager.musicManagerInstance.PlaySound("portal");
             cc.enabled = true;
+
+
         }
+
+        
     }
 }
