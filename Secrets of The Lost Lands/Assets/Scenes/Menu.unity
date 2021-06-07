@@ -2014,7 +2014,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - _name: fale
     clip: {fileID: 8300000, guid: d06652d6903effc47919722320e841c2, type: 3}
-    volume: 0.1
+    volume: 0.3
     loop: 1
     source: {fileID: 0}
   - _name: portal
@@ -2026,6 +2026,11 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 846cd407f9d3831449a4dfd68cf50cc5, type: 3}
     volume: 0.3
     loop: 0
+    source: {fileID: 0}
+  - _name: DeletePlis
+    clip: {fileID: 8300000, guid: 7c17f4f4888dec044b4f7a497eb10e8d, type: 3}
+    volume: 0.18
+    loop: 1
     source: {fileID: 0}
 --- !u!4 &493733318
 Transform:
