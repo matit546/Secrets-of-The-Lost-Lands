@@ -35,7 +35,7 @@ public class DynamicMusic : MonoBehaviour
             audioManager.PlaySound("pustynia");
             currentMusic = "pustynia";
         }
-        if (other.CompareTag("Player") && this.CompareTag(tags[0]))
+        else if (other.CompareTag("Player") && this.CompareTag(tags[0]))
         {
             audioManager.PlaySound("gory");
              currentMusic = "gory";

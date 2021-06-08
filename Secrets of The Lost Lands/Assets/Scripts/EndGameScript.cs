@@ -34,5 +34,6 @@ public class EndGameScript : MonoBehaviour
         pauseMenuUI.SetActive(true);
         var ts = TimeSpan.FromSeconds(mainPlayer.gameTime);
         text.text = "Czas gry:  "+string.Format("{0:00}:{1:00}", ts.TotalMinutes, ts.Seconds);
+        AudioManager.musicManagerInstance.StopAllSound();
     }
 }
