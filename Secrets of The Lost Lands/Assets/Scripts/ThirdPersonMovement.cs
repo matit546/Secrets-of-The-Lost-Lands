@@ -77,7 +77,7 @@ public class ThirdPersonMovement : MonoBehaviour
                     
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
+      
         if (isGrounded && velocity.y <=0f)
         {
             velocity.y = -2f;

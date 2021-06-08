@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseControl : MonoBehaviour
 {
@@ -50,4 +51,29 @@ public class PauseControl : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void BackToMenu()
+    {
+            Time.timeScale = 1;
+        List<AsyncOperation> LoadingScenes = new List<AsyncOperation>();
+        //LoadingScreen.SetActive(true);
+
+        LoadingScenes.Add(SceneManager.LoadSceneAsync("Menu", LoadSceneMode.Additive));
+        StartCoroutine(GetSceneLoadProgress(LoadingScenes));
+    }
+
+    public IEnumerator GetSceneLoadProgress(List<AsyncOperation> LoadingScenes)
+    {
+
+        foreach (var Scene in LoadingScenes)
+        {
+            while (!Scene.isDone)
+            {
+                Debug.Log("Not Loaded");
+                yield return null;
+            }
+        }
+        //LoadingScreen.SetActive(false);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("Menu"));
+    }
 }

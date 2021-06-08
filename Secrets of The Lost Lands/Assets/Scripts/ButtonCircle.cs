@@ -62,7 +62,6 @@ public class ButtonCircle : MonoBehaviour
     {
         if (!isPuzzleEnded)
         {
-            Debug.Log("LUL");
             int counter = 0;
             goodPositions.ForEach(x =>
             {
