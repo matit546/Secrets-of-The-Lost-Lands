@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +8,7 @@ using UnityEngine;
 public class LoadGameManager : MonoBehaviour
 {
     private GameObject player;
+    string[] positionNames = { "PositionKey1", "PositionKey2", "PositionKey3", "PositionKey4" };
     public void LoadGame()
     {
         if (File.Exists(Application.persistentDataPath + $"/gamesave.txt"))
@@ -34,13 +36,19 @@ public class LoadGameManager : MonoBehaviour
     {
         foreach(string key in keyNames)
         {
-            GameObject.Find(key).SetActive(false);
+            string name = Array.Find(positionNames, s => s.Contains(key));
+            GameObject keyObj = GameObject.Find(key);
+            keyObj.transform.position = GameObject.Find(name).transform.position;
+            keyObj.transform.SetParent(GameObject.Find(name).transform.parent);
+            //GameObject.Find(key).SetActive(false);
             player.GetComponent<Player>().collectedKeys += 1;
             GameObject UIManager = GameObject.Find("UIController");
             CommunicationManager communicationManager = UIManager.GetComponent<CommunicationManager>();
             int collectedKeys = player.GetComponent<Player>().collectedKeys;
             communicationManager.ChangeText(1, $"{player.GetComponent<Player>().collectedKeys}/{player.GetComponent<Player>().maxCollectedKeys}");
+            Destroy(keyObj.GetComponent<CollectableItem>());
         }
+        GameObject.Find("EndGameBarrier").GetComponent<DisableBarrierScript>().OpenBarrier(keyNames.Count);
     }
 
     public void DisableGottenPickups(List<string> pickupNames)

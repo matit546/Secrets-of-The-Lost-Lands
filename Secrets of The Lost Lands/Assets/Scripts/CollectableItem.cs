@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class CollectableItem : MonoBehaviour
     public int pickObjectCommunicate = 0;
     public int  keyCollectedText=1;
     private SaveGameManager saveGameManager;
+    public DisableBarrierScript DisableBarrierScript;
+    string[] positionNames = { "PositionKey1", "PositionKey2", "PositionKey3", "PositionKey4" };
 
     private void Start()
     {
@@ -51,7 +54,14 @@ public class CollectableItem : MonoBehaviour
                 saveGameManager.keyNames.Add(this.name);
                 communicationManager.ChangeText(keyCollectedText, $"{player.collectedKeys}/{player.maxCollectedKeys}");
                 communicationManager.DisableMessageCourotine(messageNumber,3);
-                Destroy(gameObject);
+
+                string name = Array.Find(positionNames, s => s.Contains(this.name));
+
+                this.transform.position = GameObject.Find(name).transform.position;
+                this.transform.SetParent(GameObject.Find(name).transform.parent);
+                Destroy(this.GetComponent<CollectableItem>());
+                DisableBarrierScript.OpenBarrier(player.collectedKeys);
+                //Destroy(gameObject);
             }
 
         }

@@ -32,11 +32,6 @@ public class AudioManager : MonoBehaviour
  
 
     }
-    private void Start()
-    {
-              PlaySound("DeletePlis");
-    }
-
     void Update()
     {
 

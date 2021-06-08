@@ -14,7 +14,7 @@ public class PlayerRaycast : MonoBehaviour
     public GameObject objectHolder;
     private Transform objectLocation;
     public List<Sprite> sprites;
-    public RiseStairs riseStairs;
+    public PuzzleSovledScript puzzle;
 
     private CommunicationManager communicationManager;
     private bool isHolding = false;
@@ -22,7 +22,7 @@ public class PlayerRaycast : MonoBehaviour
 
     private bool didUse = false;
     private bool isRaycastPointingAt = false;
-    public int i = 0;
+    private int i = 0;
 
     private void Start()
     {
@@ -147,7 +147,6 @@ public class PlayerRaycast : MonoBehaviour
                     communicationManager.DisableMessage(messageNumber);
                 }
             }
-
             if (Input.GetKey(KeyCode.F) && isHolding)
             {
                 isHolding = false;
@@ -164,14 +163,17 @@ public class PlayerRaycast : MonoBehaviour
                     }
                     else
                     {
-                        if(objectLocation != null)
+                        if (objectLocation != null)
                         {
                             objectTransform.transform.position = objectLocation.transform.position;
-                            riseStairs.RiseStairsAnim();
+                            objectTransform.SetParent(objectLocation);
+                            puzzle.CheckItem();
                         }
                     }
                 }
+
             }
+       
         }
     }
 
@@ -197,9 +199,12 @@ public class PlayerRaycast : MonoBehaviour
     {
         Debug.Log($"Dodalem: loc");
         objectLocation = loc;
-        enabled = true;
-        communicationManager.ChangeText(messageNumber, "DajToHamie");
-        communicationManager.ChangeSprite(messageNumber, sprites[1]);
+        if (objectLocation.childCount == 0)
+        { 
+            enabled = true;
+            communicationManager.ChangeText(messageNumber, "Po³ó¿");
+            communicationManager.ChangeSprite(messageNumber, sprites[1]);
+        }
     }
 
     public void DisablePutDown(Transform loc)
