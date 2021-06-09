@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ChangeSceneScript : MonoBehaviour
 {
     //public GameObject LoadingScreen;
     private int scene;
-    private Transform player;
     public LoadGameManager loadGameManager;
     private bool isloadingSave = false;
+    private StartGameScript startGameScript;
 
     public void LoadGame(int Scene)
     {
@@ -40,6 +41,11 @@ public class ChangeSceneScript : MonoBehaviour
             loadGameManager.LoadGame();
             isloadingSave = false;
         }
+        else
+        {
+            startGameScript = GameObject.Find("StartGamePanel").GetComponent<StartGameScript>();
+            startGameScript.startCour();
+        }
 
     }
 
@@ -48,5 +54,4 @@ public class ChangeSceneScript : MonoBehaviour
         isloadingSave = true;
         LoadGame(Scene);
     }
-
 }
